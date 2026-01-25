@@ -1,4 +1,4 @@
-// Traffic light simulation
+// TRafic light simulation
 // red -> yellow -> green
 
 void setup() {

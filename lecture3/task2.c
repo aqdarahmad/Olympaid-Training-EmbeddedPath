@@ -1,6 +1,7 @@
 int trigPin = 7;
 int echoPin = 9;
-int buIn = 5;
+int pinIn   = 5;
+
 
 float Time;
 float distance;
@@ -10,7 +11,8 @@ void setup()
   Serial.begin(9600);  
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
-  pinMode(buIn, OUTPUT);  
+  pinMode(pinIn, OUTPUT);
+   
 }
 
 void loop() 
@@ -22,16 +24,29 @@ void loop()
   digitalWrite(trigPin, LOW);
 
   Time = pulseIn(echoPin, HIGH);
-  distance = (Time * 0.0343) / 2;
+  distance = (Time * 0.0343)/2;
 
-  if (distance < 20) {
-    tone(buIn, 1000);
-  } else {
-    noTone(buIn);
+  if(distance < 50)
+  {
+    tone(pinIn,1000);
+  }
+  else if(distance < 100)
+  {
+    tone(pinIn,800);
+    delay(100);
+    noTone(pinIn);
+    delay(100);
+  }
+  else if(distance < 150) 
+  {
+    tone(pinIn , 600);
+    delay(300);
+    noTone(pinIn);
+    delay(300);
+  }
+  else{
+   noTone(pinIn);
   }
 
-  Serial.print("distance = ");
-  Serial.println(distance);
-
-  delay(100); 
+  
 }
